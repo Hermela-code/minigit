@@ -1,6 +1,3 @@
-Minigit project
-
-
 # MiniGit - A Minimal Git Clone
 
 A lightweight version control system implemented in C++ for Linux.
@@ -10,9 +7,34 @@ A lightweight version control system implemented in C++ for Linux.
 git clone https://github.com/yourusername/minigit.git
 cd minigit
 make
-./minigit init
 
-# Basic Commands
+Safe Testing Protocol
+
+Always follow these steps to prevent source code loss:
+
+    Create isolated test environment:
+    bash
+
+mkdir test_env && cd test_env  # Never test in source directory!
+cp ../minigit .  # Copy ONLY the executable
+./minigit init   # Initialize test repo
+
+Test commands safely:
+bash
+
+echo "test" > demo.txt
+./minigit add demo.txt
+./minigit commit -m "Test commit"
+
+Update and retest:
+bash
+
+    cd ..  # Return to source
+    make && cp minigit test_env/  # Update binary
+    cd test_env && ./minigit log  # Continue testing
+
+ Basic Commands
+bash
 
 # Track files
 ./minigit add file.txt
@@ -20,19 +42,25 @@ make
 # Commit changes
 ./minigit commit -m "message"
 
-# Create branch
+# Branching
 ./minigit branch new-feature
+./minigit checkout new-feature
 
-# Merge branches
+# Merging
 ./minigit merge feature
 
-#Team 
+ Team
 
-Hermela- core functionlity
-Hemen - Branching and merging 
-Samrawit - File operation
+    Hermela - Core functionality
 
-#Notes 
+    Hemen - Branching and merging
 
-Built for Linux users
-Academic project for Data structure and algorithms
+    Samrawit - File operations
+
+ Notes
+
+    Built for Linux (uses C++17 filesystem)
+
+    Academic project for Data Structures and Algorithms
+
+    Warning: Always test in test_env/ to protect source files
